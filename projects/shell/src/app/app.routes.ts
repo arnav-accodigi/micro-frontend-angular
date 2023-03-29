@@ -1,7 +1,10 @@
-import { Routes } from '@angular/router';
+import { Routes, RouterModule } from '@angular/router';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { loadRemoteModule } from '@angular-architects/module-federation';
+import { NgModule } from '@angular/core';
+import { BrowserModule } from '@angular/platform-browser';
+
 
 export const APP_ROUTES: Routes = [
   {
@@ -31,4 +34,13 @@ export const APP_ROUTES: Routes = [
   // { path:'**', ...} needs to be the LAST one.
 
 ];
+@NgModule({
+  imports: [
+    RouterModule.forRoot(APP_ROUTES)
+  ],
+  exports: [RouterModule],
+  providers: [],
+  bootstrap: []
+})
+export class AppRoutingModule { }
 
