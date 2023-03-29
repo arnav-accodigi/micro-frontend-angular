@@ -10,6 +10,12 @@ import { HttpClientModule } from '@angular/common/http';
 import authConfig from './auth_config.json';
 import { LogService } from './shared/log.service';
 import { LogTestComponent } from './log-test/log-test.component';
+import { StoreModule } from '@ngrx/store';
+import { reducers, metaReducers } from './reducers';
+import { StoreDevtoolsModule } from '@ngrx/store-devtools';
+import { environment } from '../environments/environment';
+import { CustomerModule } from './customer/customer.module';
+// import { EffectsModule } from '@ngrx/effects';
 // import { StoreModule } from '@ngrx/store';
 // import { EffectsModule } from '@ngrx/effects';
 // import { StoreRouterConnectingModule } from '@ngrx/router-store';
@@ -32,6 +38,10 @@ import { LogTestComponent } from './log-test/log-test.component';
         redirect_uri: `${window.location.origin}/home`,
       }
     }),
+    StoreModule.forRoot(reducers, { metaReducers }),
+    !environment.production ? StoreDevtoolsModule.instrument() : [],
+    CustomerModule,
+    // EffectsModule.forRoot([]),
     // StoreModule.forRoot({}, {}),
     // EffectsModule.forRoot([]),
     // StoreRouterConnectingModule.forRoot(),
